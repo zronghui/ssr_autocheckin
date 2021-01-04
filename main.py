@@ -1,4 +1,5 @@
 import requests
+import json
 import time
 from icecream import ic
 from config import config
@@ -26,7 +27,7 @@ def checkin(base_url, email, password):
     }
     response = session.post(base_url + '/user/checkin',
                             headers=headers, verify=False)
-    print(response.text)
+    print(json.loads(response.text))
 
 
 for c in config:
@@ -35,7 +36,6 @@ for c in config:
         try:
             ic(base_url, email, password)
             checkin(base_url, email, password)
-            print('签到成功')
         except Exception as e:
             print(e)
             time.sleep(3)
